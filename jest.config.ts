@@ -9,6 +9,7 @@ const config = {
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
   },
+  modulePathIgnorePatters: ['<rootDir>/tests/'],
   testEnvironment: 'jest-environment-jsdom',
 };
 
