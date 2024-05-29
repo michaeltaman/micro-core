@@ -7,6 +7,12 @@ const client = new PrismaClient({
   log: ['query', 'info', 'warn'],
 });
 
+
+/* Or
+const client = new PrismaClient({
+  log: ['*'],
+});*/
+
 export default async function Home() {
 
   const courses = await client.course.findMany();

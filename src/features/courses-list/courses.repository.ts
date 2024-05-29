@@ -11,6 +11,7 @@ class CoursesRepository {
   createCourseElement = (
     command: CreateCourseListElementCommand
   ): Promise<CourseListElement> => {
+    console.log('Adding ...');
     return dbClient.course.create({
       data: command,
     });
