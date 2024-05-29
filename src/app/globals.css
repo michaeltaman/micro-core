@@ -64,6 +64,13 @@
       --input: 217.2 32.6% 17.5%;
       --ring: 212.7 26.8% 83.9%;
     }
+
+    .courseTitleStyle {
+      margin-top: -10px;
+      margin-bottom: 7px;
+      font-size: 32px;
+      font-weight: bold;
+    }
   }
 
   @layer base {
