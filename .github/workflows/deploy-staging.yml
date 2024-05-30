@@ -25,6 +25,12 @@ jobs:
       group: staging
       cancel-in-progress: true
     steps:
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.STAGING_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          echo "${{ secrets.STAGING_SSH_FINGERPRINT }}" > ~/.ssh/known_hosts
       - name: SSH Command
         uses: D3rHase/ssh-command-action@v0.2.2
         with:
