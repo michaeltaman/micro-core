@@ -30,8 +30,8 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.STAGING_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H 161.35.193.42 || echo "ssh-keyscan failed"
-          ssh-keyscan -H 161.35.193.42 >> ~/.ssh/known_hosts
+          ssh-keyscan -t ed25519 -H 161.35.193.42 || echo "ssh-keyscan failed"
+          ssh-keyscan -t ed25519 -H 161.35.193.42 >> ~/.ssh/known_hosts
           cat ~/.ssh/known_hosts
       - name: SSH Command
         uses: D3rHase/ssh-command-action@v0.2.2
