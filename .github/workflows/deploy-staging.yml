@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:  # Add this line
 
 jobs:
   lint:
@@ -35,14 +36,13 @@ jobs:
       - name: SSH Command
         uses: D3rHase/ssh-command-action@v0.2.2
         with:
-          # hostname / IP of the server
           host: ${{ secrets.STAGING_SSH_HOST }}
           user: ${{ secrets.STAGING_SSH_USERNAME }}
           private_key: ${{ secrets.STAGING_SSH_PRIVATE_KEY }}
           host_fingerprint: ${{ secrets.STAGING_SSH_FINGERPRINT }}
           command: source ~/.nvm/nvm.sh; ~/deploy.sh
   e2e:
-    needs: deploy
+    #needs: deploy  # Comment out this line
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
