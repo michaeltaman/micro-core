@@ -31,7 +31,7 @@ jobs:
           echo "${{ secrets.STAGING_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -t ed25519 -H 161.35.193.42 || echo "ssh-keyscan failed"
-          ssh-keyscan -t ed25519 -H 161.35.193.42 >> ~/.ssh/known_hosts
+          echo '161.35.193.42 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBN+Mh3U/3We4VY65gxg+4xTxi0Y63Cd5B5BzRz2i5Za2t4AH0WpFHJd5R5qAWHVQ3Ehb5vq88E2B+Z/ic5Q3LZt0=' >> ~/.ssh/known_hosts
           cat ~/.ssh/known_hosts
       - name: SSH Command
         uses: D3rHase/ssh-command-action@v0.2.2
