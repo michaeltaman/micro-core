@@ -1,7 +1,7 @@
 'use client';
 
 import {
-    Form,
+  Form,
   FormControl,
   FormDescription,
   FormField,
@@ -35,8 +35,8 @@ export function CreateCourseForm({
   const form = useForm({
     resolver: zodResolver(createCourseFormSchema),
     defaultValues: {
-      name: '',
-      description: '',
+      name: "",
+      description: "",
     },
   });
 
