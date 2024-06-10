@@ -17,7 +17,7 @@ export const nextAuthConfig: AuthOptions = {
     EmailProvider({
       server: {
         host: privateConfig.EMAIL_SERVER_HOST,
-        port: privateConfig.EMAIL_SERVER_PORT,
+        port: Number(privateConfig.EMAIL_SERVER_PORT),
         auth: {
           user: privateConfig.EMAIL_SERVER_USER,
           pass: privateConfig.EMAIL_SERVER_PASSWORD,
