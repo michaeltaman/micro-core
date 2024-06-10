@@ -1,9 +1,9 @@
 import { useMutation } from '@tanstack/react-query';
 import { signIn } from 'next-auth/react';
-import { useSearchParams } from 'next/navigation';
+import { useSafeSearchParams } from './useSafeSearchParams';
 
 export function useEmailSignIn() {
-  const searchParams = useSearchParams();
+  const searchParams = useSafeSearchParams();
   const callbackUrl = searchParams.get('callbackUrl');
 
   const emailSignInMutation = useMutation({
