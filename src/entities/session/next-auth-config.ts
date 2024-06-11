@@ -6,6 +6,9 @@ import { compact } from 'lodash-es';
 import { privateConfig } from '@/shared/config/private';
 import EmailProvider from 'next-auth/providers/email';
 
+console.log('GitHub ID: ', privateConfig.GITHUB_ID);
+console.log('GitHub Secret: ', privateConfig.GITHUB_SECRET);
+
 export const nextAuthConfig: AuthOptions = {
   adapter: PrismaAdapter(dbClient) as AuthOptions['adapter'],
   pages: {
