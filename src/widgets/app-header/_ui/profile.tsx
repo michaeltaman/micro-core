@@ -30,6 +30,7 @@ export function Profile() {
   }
 
   const user = session?.data?.user;
+  console.log('User data:', session.data?.user);
 
   return (
     <DropdownMenu>
