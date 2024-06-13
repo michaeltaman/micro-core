@@ -21,6 +21,8 @@ export function Profile() {
   const session = useAppSession();
   const { signOut, isPending: isLoadingSignOut } = useSignOut();
 
+  console.log("Hello from Profile component");
+
   console.log(useRole());
 
   if (session.status === "loading") {
