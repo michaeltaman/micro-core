@@ -54,6 +54,7 @@ model User {
   id            String    @id @default(cuid())
   name          String?
   email         String?   @unique
+  role          ROLE      @default(USER)
   emailVerified DateTime? @map("email_verified")
   image         String?
   accounts      Account[]
@@ -69,4 +70,9 @@ model VerificationToken {
 
   @@unique([identifier, token])
   @@map("verificationtokens")
+}
+
+enum ROLE {
+  ADMIN
+  USER
 }
