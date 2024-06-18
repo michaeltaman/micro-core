@@ -1,17 +1,11 @@
 'use server';
 import { z } from 'zod';
 import { getUserUseCase } from '../_use-cases/get-user';
-import { NeedAuthError } from '@/shared/lib/errors';
 import { getSessionStrictServer } from '../session.server';
+import { profileSchema } from '../_domain/schema';
 
 const propsSchema = z.object({
   userId: z.string(),
-});
-
-const profileSchema = z.object({
-  email: z.string(),
-  name: z.string().nullable().optional(),
-  image: z.string().nullable().optional(),
 });
 
 const resultSchema = z.object({

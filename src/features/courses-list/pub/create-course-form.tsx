@@ -58,7 +58,7 @@ export function CreateCourseForm({
             <FormItem>
               <FormLabel>Name</FormLabel>
               <FormControl>
-                <Input placeholder="name ..." {...field} />
+                <Input placeholder="name ..." {...field} autoComplete="name"/>
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -72,7 +72,7 @@ export function CreateCourseForm({
             <FormItem>
               <FormLabel>Description</FormLabel>
               <FormControl>
-                <Textarea placeholder="description ..." {...field} />
+                <Textarea placeholder="description ..." {...field} autoComplete="on"/>
               </FormControl>
               <FormMessage />
             </FormItem>
