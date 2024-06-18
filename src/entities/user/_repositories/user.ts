@@ -14,7 +14,6 @@ export class UserRepository {
     return await dbClient.user.create({
       data: {
         ...user,
-        email: user.email || '',
       },
     });
   }
