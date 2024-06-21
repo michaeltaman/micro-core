@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Button } from '@/shared/ui/button';
 import { Spinner } from '@/shared/ui/spinner';
 import { ProfileAvatar } from '@/entities/user/profile';
@@ -16,42 +16,41 @@ export function AvatarField({
   autoComplete?: string;
 }) {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [showDebugInfo, setShowDebugInfo] = useState(false);
+  const [debugInfo, setDebugInfo] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const { handleFileSelect: originalHandleFileSelect, isPending } = useUploadAvatar({
+    onSuccess: onChange,
+  });
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
-      console.log(file);
       setSelectedFile(file);
       onChange(URL.createObjectURL(file));
+      setShowDebugInfo(true);
+      setDebugInfo(`Selected file: ${file.name}, size: ${file.size}, type: ${file.type}`);
+      originalHandleFileSelect();
+    } else {
+      setShowDebugInfo(false);
+      setDebugInfo(null);
     }
   };
 
-  const { handleFileSelect, isPending } = useUploadAvatar({
-    onSuccess: onChange,
-  });
+  const handleButtonClick = () => {
+    fileInputRef.current?.click();
+  };
 
   return (
     <div>
-      <div>
-        {/* Debug component */}
-        {process.env.NODE_ENV === 'production' && selectedFile && (
-          <div>
-            <h2>Debug Information</h2>
-            <p>File Name: {selectedFile.name}</p>
-            <p>File Size: {selectedFile.size}</p>
-            <p>File Type: {selectedFile.type}</p>
-          </div>
-        )}
-      </div>
+      {showDebugInfo && debugInfo && <div>{debugInfo}</div>}
 
       <Button
         variant="ghost"
         className="w-[84px] h-[84px] p-0.5 rounded-full relative block"
         type="button"
-        onClick={() => {
-          console.log('Button clicked');
-          handleFileSelect();
-        }}
+        onClick={handleButtonClick}
       >
         {isPending && (
           <div className="inset-0 absolute flex items-center justify-center z-10">
@@ -69,6 +68,7 @@ export function AvatarField({
           autoComplete={autoComplete}
           accept="image/*"
           style={{ display: 'none' }}
+          ref={fileInputRef}
         />
       </Button>
     </div>
