@@ -30,7 +30,10 @@ export function AvatarField({
       variant="ghost"
       className="w-[84px] h-[84px] p-0.5 rounded-full relative block"
       type="button"
-      onClick={handleFileSelect}
+      onClick={() => {
+        console.log('Button clicked');
+        handleFileSelect();
+      }}
     >
       {isPending && (
         <div className="inset-0 absolute flex items-center justify-center z-10">
