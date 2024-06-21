@@ -5,11 +5,17 @@ import { uploadAvatarAction } from '../_actions/upload-avatar';
 
 export const useUploadAvatar = ({
   onError,
+  onSuccess,
 }: {
   onError?: (type?: 'big-size') => void;
+  onSuccess?: (avatarPath: string) => void;
 }) => {
   const { mutateAsync, isPending } = useMutation({
     mutationFn: uploadAvatarAction,
+    onSuccess(data) {
+      onSuccess?.(data.avatar.path);
+      console.log(data);
+    },
   });
 
   const handleFileSelect = async () => {

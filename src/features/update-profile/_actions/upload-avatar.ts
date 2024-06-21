@@ -2,6 +2,7 @@
 import { z } from 'zod';
 import { AVATAR_FILE_KEY } from '../_constants';
 import { BadRequest } from '@/shared/lib/errors';
+import { fileStorage } from '@/shared/lib/file-storage';
 
 const resultSchema = z.object({
   avatar: z.object({
@@ -15,5 +16,12 @@ export const uploadAvatarAction = async (formData: FormData) => {
   if (!(file instanceof File)) {
     throw new BadRequest();
   }
-  console.log(file);
+
+  const storedFile = await fileStorage.uploadImage(file, {
+    tags: [{ Key: 'image-type', Value: 'avatar' }],
+  });
+
+  return resultSchema.parse({
+    avatar: storedFile,
+  });
 };
