@@ -52,6 +52,7 @@ export function AvatarField({
         id={id}
         onChange={handleFileChange}
         autoComplete={autoComplete}
+        accept="image/*"
         style={{ display: 'none' }}
       />
     </Button>
