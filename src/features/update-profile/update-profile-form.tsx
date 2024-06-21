@@ -29,8 +29,8 @@ export function UpdateProfileForm({
     return <Spinner aria-label="Profile's loading" />;
   }
 
-  if (!profileQuery.data) {
-    return <div>Unable to load your profile, something went wrong</div>;
+  if (profileQuery.isPending || !profileQuery.data || !profileQuery.data.profile) {
+    return <Spinner aria-label="Profile's loading" />;
   }
 
   return (

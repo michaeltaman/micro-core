@@ -102,10 +102,10 @@ const ImageField = ({
         <FormLabel htmlFor="avatar">Avatar</FormLabel>
         <FormControl>
           <AvatarField
-            id="avatar"
+             id="avatar"
             value={field.value}
             onChange={field.onChange}
-            autoComplete="photo" // autocomplete attribute added
+             autoComplete="photo" // autocomplete attribute added
           />
         </FormControl>
       </FormItem>
