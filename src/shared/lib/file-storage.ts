@@ -27,20 +27,11 @@ class FileStorage {
     },
   });
 
-  // async uploadImage(file: File, tag: string) {
-  //   return this.upload(file, privateConfig.S3_IMAGES_BUCKET, tag);
-  // }
-
-  async uploadImage(
-    file: File,
-    options?: {
-      tags?: Tag[];
-    }
-  ) {
-    return this.upload(file, privateConfig.S3_IMAGES_BUCKET, options);
+  async uploadImage(file: File, tag: string) {
+    return this.upload(file, privateConfig.S3_IMAGES_BUCKET, tag);
   }
 
-  /*async upload(file: File, bucket: string, tag: string): Promise<StoredFile> {
+  async upload(file: File, bucket: string, tag: string): Promise<StoredFile> {
     const res = await new Upload({
       client: this.s3Client,
       params: {
@@ -58,37 +49,6 @@ class FileStorage {
       id: cuid(),
       name: file.name,
       type: file.type,
-      path: `/storage/${bucket}/${res.Key}`,
-      prefix: '/storage',
-      eTag: res.ETag,
-    };
-  }*/
-
-  async upload(
-    file: File,
-    bucket: string,
-    options?: {
-      tags?: Tag[];
-    }
-  ): Promise<StoredFile> {
-    const res = await new Upload({
-      client: this.s3Client,
-      params: {
-        ACL: 'public-read',
-        Bucket: bucket,
-        Key: `${cuid()}-${file.name}`,
-        Body: file,
-      },
-      tags: options?.tags ?? [], // optional tags
-      queueSize: 4, //optional concurrency configuration
-      partSize: 1024 * 1024 * MAX_AVATAR_SIZE_MB, //optional size of each part, in bytes at least 5MB
-      leavePartsOnError: false, // optional manually handle dropped parts
-    }).done();
-
-    return {
-      id: cuid(),
-      name: file.name,
-      type: lookup(file.name) || '',
       path: `/storage/${bucket}/${res.Key}`,
       prefix: '/storage',
       eTag: res.ETag,

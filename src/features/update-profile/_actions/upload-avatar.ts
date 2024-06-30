@@ -26,3 +26,4 @@ export const uploadAvatarAction = async (formData: FormData) => {
     avatar: storedFile,
   });
 };
+
